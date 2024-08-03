@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview and Navigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            color: #333;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: #1d15ff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Key Features */
+        .key-features {
+            font-size: 1.5em;
+            color: #1d15ff;
+            margin: 20px;
+        }
+
+        .key-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-features li {
+            margin: 10px 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            margin: 10px 0;
+            width: 200px;
+        }
+
+        .nav-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-button:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-button:focus {
+            outline: 2px dashed #0056b3;
+            outline-offset: 4px;
+        }
+
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bright Way Overview</h1>
+    </header>
+    <main role="main">
+        <div class="key-features">
+            <h2>Key Features</h2>
+            <ul>
+                <li>Live Camera Feed</li>
+                <li>Audio Assistance</li>
+                <li>Text Recognition</li>
+                <li>Navigation Guidance</li>
+            </ul>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-button" id="camera-feed-button">Live Camera Feed</button>
+            <button class="nav-button" id="audio-assistance-button">Audio Assistance</button>
+            <button class="nav-button" id="text-recognition-button">Text Recognition</button>
+            <button class="nav-button" id="navigation-guidance-button">Navigation Guidance</button>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Bright Way
+    </footer>
+    <script>
+        document.getElementById('camera-feed-button').addEventListener('click', function() {
+            alert('Navigating to Live Camera Feed!');
+            // You can add more logic here to navigate to the actual camera feed functionality
+        });
+
+        document.getElementById('audio-assistance-button').addEventListener('click', function() {
+            alert('Navigating to Audio Assistance!');
+            // You can add more logic here to navigate to the audio assistance functionality
+        });
+
+        document.getElementById('text-recognition-button').addEventListener('click', function() {
+            alert('Navigating to Text Recognition!');
+            // You can add more logic here to navigate to the text recognition functionality
+        });
+
+        document.getElementById('navigation-guidance-button').addEventListener('click', function() {
+            alert('Navigating to Navigation Guidance!');
+            // You can add more logic here to navigate to the navigation guidance functionality
+        });
+    </script>
+</body>
+</html>

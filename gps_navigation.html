@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Navigation with MapQuest</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+        .control {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-family: Arial, sans-serif;
+        }
+        .control input, .control button {
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .control button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .control button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="control">
+        <input type="text" id="destination" placeholder="Enter destination" />
+        <button id="start-nav">Start Navigation</button>
+    </div>
+
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v1.0/mq-map.js?key=YOUR_MAPQUEST_API_KEY"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v1.0/mq-geocoding.js?key=YOUR_MAPQUEST_API_KEY"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v1.0/mq-directions.js?key=YOUR_MAPQUEST_API_KEY"></script>
+    <script>
+        // MapQuest API Key
+        const mapQuestKey = 'YOUR_MAPQUEST_API_KEY';
+
+        // Initialize the map
+        var map = L.map('map', {
+            center: [40.7128, -74.0060], // Default to New York City
+            zoom: 13,
+            layers: [L.tileLayer(`https://www.mapquestapi.com/staticmap/v5/map?key=${mapQuestKey}&center={lat},{lng}&zoom={z}&size={w}x{h}&type=roadmap`)]
+        });
+
+        // Add MapQuest layer
+        L.mapquest.tileLayer('map').addTo(map);
+
+        // Initialize the Geocoding and Directions services
+        var geocodeService = L.mapquest.geocodingService();
+        var directionsService = L.mapquest.directionsService();
+
+        // Add marker for the current location
+        var currentMarker;
+
+        // Function to detect and update the user's current location
+        function locateUser() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var lat = position.coords.latitude;
+                    var lng = position.coords.longitude;
+
+                    // Center map on current location
+                    map.setView([lat, lng], 13);
+
+                    // Add marker for current location
+                    if (currentMarker) {
+                        currentMarker.setLatLng([lat, lng]);
+                    } else {
+                        currentMarker = L.marker([lat, lng]).addTo(map)
+                            .bindPopup('Current Location')
+                            .openPopup();
+                    }
+                }, function() {
+                    alert('Geolocation service failed.');
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        // Call locateUser to center the map on the user's current location
+        locateUser();
+
+        // Handle start navigation button click
+        document.getElementById('start-nav').addEventListener('click', function() {
+            var destination = document.getElementById('destination').value;
+            if (destination) {
+                geocodeService.geocode({ address: destination }, function(err, results) {
+                    if (err || !results || !results.results.length) {
+                        alert('Destination not found.');
+                        return;
+                    }
+
+                    var destinationCoords = results.results[0].geometry.location;
+                    var destinationLatLng = [destinationCoords.lat, destinationCoords.lng];
+
+                    // Add marker for destination
+                    L.marker(destinationLatLng).addTo(map)
+                        .bindPopup(destination)
+                        .openPopup();
+
+                    // Get route from current location to destination
+                    directionsService.route({
+                        start: [currentMarker.getLatLng().lat, currentMarker.getLatLng().lng],
+                        end: destinationLatLng
+                    }, function(err, route) {
+                        if (err) {
+                            alert('Route not found.');
+                            return;
+                        }
+
+                        L.polyline(route.route.shape.map(function(coord) {
+                            return [coord.lat, coord.lng];
+                        }), { color: 'blue' }).addTo(map);
+
+                        // Start voice navigation
+                        var utterance = new SpeechSynthesisUtterance(`Navigate to ${destination}. Follow the route shown.`);
+                        window.speechSynthesis.speak(utterance);
+                    });
+                });
+            } else {
+                alert('Please enter a destination.');
+            }
+        });
+    </script>
+</body>
+</html>
+
+

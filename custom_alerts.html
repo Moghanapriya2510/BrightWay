@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Alerts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #1d15ff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 1.2em;
+            margin: 10px 0;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"], input[type="time"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .alert-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .alert {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .alert span {
+            font-size: 1em;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #721c24;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Custom Alerts</h1>
+        <form id="alert-form">
+            <label for="alert-name">Alert Name:</label>
+            <input type="text" id="alert-name" required>
+
+            <label for="alert-type">Alert Type:</label>
+            <select id="alert-type">
+                <option value="Obstacle">Obstacle</option>
+                <option value="Location">Location</option>
+                <option value="Text Recognition">Text Recognition</option>
+            </select>
+
+            <div id="location-fields" style="display: none;">
+                <label for="alert-location">Location:</label>
+                <input type="text" id="alert-location" placeholder="Enter location address">
+            </div>
+
+            <button type="submit" class="btn">Add Alert</button>
+        </form>
+
+        <div class="alert-container" id="alert-container">
+            <!-- Alerts will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        const alertForm = document.getElementById('alert-form');
+        const alertContainer = document.getElementById('alert-container');
+        const alertType = document.getElementById('alert-type');
+        const locationFields = document.getElementById('location-fields');
+
+        alertType.addEventListener('change', function() {
+            if (alertType.value === 'Location') {
+                locationFields.style.display = 'block';
+            } else {
+                locationFields.style.display = 'none';
+            }
+        });
+
+        alertForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const alertName = document.getElementById('alert-name').value;
+            const alertTypeValue = alertType.value;
+            const alertLocation = document.getElementById('alert-location').value;
+
+            let alertText = `${alertName} - ${alertTypeValue}`;
+            if (alertTypeValue === 'Location') {
+                alertText += ` (${alertLocation})`;
+            }
+
+            const alertElement = document.createElement('div');
+            alertElement.classList.add('alert');
+            alertElement.innerHTML = `
+                <span>${alertText}</span>
+                <button class="delete-btn">&times;</button>
+            `;
+
+            const deleteBtn = alertElement.querySelector('.delete-btn');
+            deleteBtn.addEventListener('click', function() {
+                alertContainer.removeChild(alertElement);
+            });
+
+            alertContainer.appendChild(alertElement);
+
+            alertForm.reset();
+            locationFields.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
+

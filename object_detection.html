@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Object Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            color: #333;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .camera-feed {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: #000;
+            margin-bottom: 20px;
+            position: relative;
+            object-fit: cover;
+        }
+
+        .object-list {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 10px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            width: 100%;
+        }
+
+        .object-list h2 {
+            margin-top: 0;
+        }
+
+        .voice-feedback, .back-button {
+            background: #007BFF;
+            color: #fff;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            margin: 10px;
+        }
+
+        .voice-feedback:hover, .back-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .voice-feedback:active, .back-button:active {
+            transform: translateY(0);
+        }
+
+        .back-button {
+            background: #ff4d4d;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Real-Time Object Detection</h1>
+        </header>
+        <main>
+            <!-- Camera Feed -->
+            <video id="camera-feed" class="camera-feed" autoplay></video>
+
+            <!-- Object List -->
+            <div id="object-list" class="object-list">
+                <h2>Detected Objects:</h2>
+                <!-- Object entries will be dynamically added here -->
+            </div>
+
+            <!-- Voice Feedback Button -->
+            <button class="voice-feedback" id="voice-feedback-button">Get Voice Feedback</button>
+        </main>
+        <footer>
+            &copy; 2024 Bright Way
+        </footer>
+    </div>
+    <!-- Back Button -->
+    <button class="back-button" id="back-button">Back</button>
+
+    <script>
+        // Function to start camera feed
+        function startCameraFeed() {
+            const video = document.getElementById('camera-feed');
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(error => {
+                    console.error('Error accessing camera:', error);
+                });
+        }
+
+        // Function to update object list and provide voice feedback
+        function updateObjectList(objects) {
+            const objectList = document.getElementById('object-list');
+            objectList.innerHTML = '<h2>Detected Objects:</h2>';
+            objects.forEach(object => {
+                const listItem = document.createElement('div');
+                listItem.textContent = object;
+                objectList.appendChild(listItem);
+            });
+        }
+
+        // Function to provide voice feedback
+        function provideVoiceFeedback() {
+            const objects = Array.from(document.getElementById('object-list').querySelectorAll('div'))
+                .map(div => div.textContent);
+            if (objects.length > 0) {
+                const message = 'Detected objects: ' + objects.join(', ');
+                const speech = new SpeechSynthesisUtterance(message);
+                window.speechSynthesis.speak(speech);
+            } else {
+                const speech = new SpeechSynthesisUtterance('No objects detected.');
+                window.speechSynthesis.speak(speech);
+            }
+        }
+
+        // Event Listener for Voice Feedback Button
+        document.getElementById('voice-feedback-button').addEventListener('click', provideVoiceFeedback);
+
+        // Event Listener for Back Button
+        document.getElementById('back-button').addEventListener('click', function() {
+            window.history.back();
+        });
+
+        // Start Camera Feed on Page Load
+        window.onload = startCameraFeed;
+
+        // Simulate detected objects for demonstration purposes
+        setTimeout(() => {
+            updateObjectList(['Person']);
+        }, 3000);
+    </script>
+</body>
+</html>

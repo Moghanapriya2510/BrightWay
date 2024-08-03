@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            color: #333;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .nav-title {
+            font-size: 3em;
+            color: #1d15ff;
+            margin: 20px 0;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transform: rotateX(10deg);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-title:hover {
+            color: #003064;
+            transform: rotateX(0deg);
+        }
+
+        .nav-item {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            padding: 20px;
+            width: 90%;
+            max-width: 300px;
+            font-size: 1.2em;
+            color: #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: rotateX(0deg);
+            transform-style: preserve-3d;
+        }
+
+        .nav-item:hover {
+            transform: rotateX(-5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-item a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item a:hover {
+            color: #0056b3;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="nav-title">Navigation Hub</div>
+        </header>
+        <main>
+            <div class="nav-item">
+                <a href="object_detection.html">Real-Time Object Detection</a>
+            </div>
+            <div class="nav-item">
+                <a href="gps_navigation.html">GPS Navigation</a>
+            </div>
+            <div class="nav-item">
+                <a href="voice_assistance.html">Voice Assistance Settings</a>
+            </div>
+            <div class="nav-item">
+                <a href="text_recognition.html">Text Recognition</a>
+            </div>
+            <div class="nav-item">
+                <a href="custom_alerts.html">Custom Alerts</a>
+            </div>
+            <div class="nav-item">
+                <a href="remote_assistance.html">Remote Assistance</a>
+            </div>
+            <div class="nav-item">
+                <a href="pairing_preferences.html">Pairing and Preferences</a>
+            </div>
+            <div class="nav-item">
+                <a href="user_feedback.html">User Feedback</a>
+            </div>
+        </main>
+        <footer>
+            &copy; 2024 Bright Way
+        </footer>
+    </div>
+</body>
+</html>

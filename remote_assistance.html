@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Assistance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #1d15ff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 1.2em;
+            margin: 10px 0;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .emergency-btn {
+            background-color: #FF0000;
+        }
+
+        .emergency-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Remote Assistance</h1>
+        <form id="assistance-form">
+            <label for="contact-name">Contact Name:</label>
+            <input type="text" id="contact-name" placeholder="Enter contact name" required>
+
+            <label for="contact-number">Contact Number:</label>
+            <input type="tel" id="contact-number" placeholder="Enter contact number" required>
+
+            <button type="submit" class="btn">Enable Remote Assistance</button>
+        </form>
+        
+        <button id="emergency-btn" class="btn emergency-btn">Contact Emergency Services</button>
+    </div>
+
+    <script>
+        const assistanceForm = document.getElementById('assistance-form');
+        const emergencyBtn = document.getElementById('emergency-btn');
+
+        assistanceForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const contactName = document.getElementById('contact-name').value;
+            const contactNumber = document.getElementById('contact-number').value;
+
+            // Here you can add the code to save the contact information and enable remote assistance
+
+            alert(`Remote assistance enabled for ${contactName} (${contactNumber})`);
+            assistanceForm.reset();
+        });
+
+        emergencyBtn.addEventListener('click', function() {
+            // Here you can add the code to contact emergency services
+
+            alert('Contacting emergency services...');
+        });
+    </script>
+</body>
+</html>
