@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real-Time Object Detection</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins';
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            background-color:white;
             color: #333;
             text-align: center;
             display: flex;
@@ -58,7 +59,7 @@
         }
 
         .voice-feedback, .back-button {
-            background: #007BFF;
+            background-color:#3A4A63;
             color: #fff;
             padding: 15px;
             font-size: 1.2em;
@@ -71,7 +72,7 @@
         }
 
         .voice-feedback:hover, .back-button:hover {
-            background-color: #0056b3;
+            background-color:#3A4A63;
             transform: translateY(-3px);
         }
 
@@ -80,7 +81,7 @@
         }
 
         .back-button {
-            background: #ff4d4d;
+            background-color:#3A4A63;
             position: fixed;
             bottom: 20px;
             left: 20px;
@@ -113,12 +114,12 @@
             <!-- Voice Feedback Button -->
             <button class="voice-feedback" id="voice-feedback-button">Get Voice Feedback</button>
         </main>
-        <footer>
+        
+    </div><footer>
             &copy; 2024 Bright Way
         </footer>
-    </div>
     <!-- Back Button -->
-    <button class="back-button" id="back-button">Back</button>
+    <button class="back-button" id="back-button"><i class="fa-solid fa-arrow-left"></i></button>
 
     <script>
         // Function to start camera feed
