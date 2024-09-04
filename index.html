@@ -8,10 +8,10 @@
     <style>
         /* General Styles */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins';
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            background-color:#3A4A63;
             color: #333;
             text-align: center;
             display: flex;
@@ -26,35 +26,19 @@
         .header-image {
             width: 100%;
             max-width: 600px;
-            height: auto;
-            border-radius:50%;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .header-image:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
-        }
-
         /* Welcome Message */
         .welcome-message {
             font-size: 3em;
-            color: #1d15ff;
+            color:white;
             margin: 10px 0;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
             transition: color 0.3s;
         }
-
-        .welcome-message:hover {
-            color: #003064;
-        }
-
         /* Introduction */
         .introduction {
-            font-size: 1.2em;
-            color: #555;
+            font-size: 1.1em;
+            color:#F5F5F5;
             margin: 20px 0;
             max-width: 600px;
             padding: 0 20px;
@@ -62,8 +46,8 @@
 
         /* Get Started Button */
         .get-started-button {
-            background-color: #007BFF;
-            color: #fff;
+            background-color:white;
+            color:black;
             padding: 15px 30px;
             font-size: 1.5em;
             border: none;
@@ -97,7 +81,7 @@
             bottom: 10px;
             width: 100%;
             text-align: center;
-            color: #555;
+            color: #d0d0d0;
         }
 
         /* Media Queries for Responsiveness */
@@ -117,9 +101,6 @@
         }
 
         @media (max-width: 480px) {
-            .welcome-message {
-                font-size: 1.5em;
-            }
 
             .introduction {
                 font-size: 0.9em;
@@ -135,14 +116,14 @@
 <body>
     <header>
         <!-- Image of visually impaired people -->
-        <img src="BrightWay.jpg" class="header-image">
+        <img src="image (2).png" class="header-image">
     </header>
     <main role="main">
         <!-- Welcome Message -->
-        <div class="welcome-message">ENVISION PEOPLE</div>
+        <div class="welcome-message">BRIGHT WAY</div>
         <!-- Introduction for Screen Readers -->
         <div class="introduction" aria-live="polite">
-            Welcome to Bright Way, a platform designed to assist visually impaired individuals. Navigate easily with screen reader support. Click the "Get Started" button to begin your journey with us.
+            Guiding Every Step with Precision
         </div>
         <!-- Get Started Button -->
         <button class="get-started-button" id="get-started-button" aria-label="Get Started">Get Started</button>
